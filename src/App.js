@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import data from './data.js';
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import Detail from './routes/Detail.js'
 
 function App() {
 
   let [shoes] = useState(data)
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -17,14 +19,11 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Cart</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate(-1) }}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('./detail') }}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-
-      <Link to="/">홈</Link>
-      <Link to="/detail">상세페이지</Link>
 
       <Routes>
         <Route path="/" element={
@@ -43,13 +42,26 @@ function App() {
         </div>
         </div>
         } />
-        <Route path="/detail" element={<div>상세페이지임</div>} />
-        <Route path="/about" element={<div>어바웃페이지임</div>} />
+        <Route path="/detail" element={<Detail/>} />
+        
+        <Route path="/about" element={<About/>}>
+          <Route path="member" element={<div>멤버임</div>} />
+          <Route path="location" element={<div>위치정보임</div>} />
+        </Route>
       </Routes>
 
       
     </div>
   );
+}
+
+function About(){
+  return (
+    <div>
+      <h4>회사정보임</h4>
+      <Outlet></Outlet>
+    </div>
+  )
 }
 
 function Card(props){
