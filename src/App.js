@@ -13,12 +13,6 @@ function App() {
   return (
     <div className="App">
 
-      <Routes>
-      <Route path="/" element={<div>메인페이지임</div>} />
-        <Route path="/detail" element={<div>상세페이지임</div>} />
-        <Route path="/about" element={<div>어바웃페이지임</div>} />
-      </Routes>
-
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
@@ -29,24 +23,31 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className="main-bg"></div>
+      <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link>
 
-      <div className="container">
-        <div className="row">
-          {/*
-          <Card shoes={shoes[0]} i={1}></Card>
-          <Card shoes={shoes[1]} i={2}></Card>
-          <Card shoes={shoes[2]} i={3}></Card>
-          */}
-          {
-            shoes.map((a, i)=>{
-              return (
-                <Card shoes={shoes[i]} i={i}></Card>
-              )
-            })
-          }
+      <Routes>
+        <Route path="/" element={
+        <div>
+        <div className="main-bg"></div>
+        <div className="container">
+          <div className="row">
+            {
+              shoes.map((a, i)=>{
+                return (
+                  <Card shoes={shoes[i]} i={i}></Card>
+                )
+              })
+            }
+          </div>
         </div>
-      </div>
+        </div>
+        } />
+        <Route path="/detail" element={<div>상세페이지임</div>} />
+        <Route path="/about" element={<div>어바웃페이지임</div>} />
+      </Routes>
+
+      
     </div>
   );
 }
