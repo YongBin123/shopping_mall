@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { Nav } from 'react-bootstrap'
 
 function Detail(props) {
 
   let [count, setCount] = useState(0)
   let {id} = useParams();
   let [alert, setAlert] = useState(true)
+  let [탭, 탭변경] = useState(0)
 
   useEffect(()=>{
     setTimeout(()=>{ setAlert(false) }, 2000)
@@ -34,7 +36,31 @@ function Detail(props) {
         <button className="btn btn-danger">주문하기</button> 
       </div>
     </div>
-  </div> 
-)}
+    <Nav variant="tabs"  defaultActiveKey="link0">
+      <Nav.Item>
+        <Nav.Link  onClick={()=>{ 탭변경(0) }} eventKey="link0">버튼0</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link onClick={()=>{ 탭변경(1) }} eventKey="link1">버튼1</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link  onClick={()=>{ 탭변경(2) }} eventKey="link2">버튼2</Nav.Link>
+      </Nav.Item>
+    </Nav>
+
+    <Tabcontent 탭={탭}/>
+  </div>
+    )
+  }
+
+  function Tabcontent(props) {
+    if (props.탭 == 0) {
+      return <div>내용0</div>
+    } else if (props.탭 == 1) {
+      return <div>내용1</div>
+    } else if (props.탭 == 2) {
+      return <div>내용2</div>
+    } 
+  }
 
 export default Detail;

@@ -48,8 +48,6 @@ function App() {
             let copy = [...shoes, ...결과.data];
             setShoes(copy);
           })   
-
-          axios.post
         }}>더보기</button>
         </div>
         } />
