@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Nav } from 'react-bootstrap'
 
 function Detail(props) {
-
+  
   let [count, setCount] = useState(0)
   let {id} = useParams();
   let [alert, setAlert] = useState(true)
@@ -48,12 +48,12 @@ function Detail(props) {
       </Nav.Item>
     </Nav>
 
-    <Tabcontent 탭={탭}/>
+    <TabContent 탭={탭}/>
   </div>
     )
   }
 
-  function Tabcontent(props) {
+  /*  function TabContent(props) {
     if (props.탭 == 0) {
       return <div>내용0</div>
     } else if (props.탭 == 1) {
@@ -61,6 +61,24 @@ function Detail(props) {
     } else if (props.탭 == 2) {
       return <div>내용2</div>
     } 
+  }
+  */
+
+  function TabContent({탭}){
+
+    let [fade, setFade] = useState('')
+    
+    useEffect(()=>{
+      setTimeout(()=>{ setFade('end') }, 10)
+      
+      return ()=>{
+        setFade('end')
+      }
+    }, [탭])
+
+    return (<div className={'start' + fade}>
+      { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>)
   }
 
 export default Detail;
